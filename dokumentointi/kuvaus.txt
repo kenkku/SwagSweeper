@@ -1,0 +1,12 @@
+SwagSweeper – miinaharava uudelle vuosituhannelle
+
+Toteutetaan perinteinen miinaharavapeli, jossa pelaajan tulee löytää pelikentäl-
+lä olevat miinat osumatta niihin. Pelaaja "astuu" ruutu kerrallaan pelikentälle 
+kunnes osutaan miinaan tai astumattomia ruutuja on jäljellä vain miinojen ver-
+ran. Avatuissa tyhjissä ruuduissa näkyy ympärillä olevissa ruuduissa olevien 
+miinojen määrä.
+
+Pelikentän kokoa ja miinojen määrää voi säätää vapaasti, lisäksi peli tarjoaa 
+muutaman valmiin vaikeustason. Peli pitää myös kirjaa nopeimmista ajoista tai 
+parhaista pisteistä.
+
