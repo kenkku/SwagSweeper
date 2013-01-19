@@ -6,3 +6,5 @@
 *.ear
 /SwagSweeper/nbproject/private/
 
+/SwagSweeper/build/
+/SwagSweeper/dist/
