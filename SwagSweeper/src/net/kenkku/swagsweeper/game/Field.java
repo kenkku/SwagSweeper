@@ -36,6 +36,18 @@ public class Field implements Observer {
         return adjacents;
     }
 
+    int getNumMines(Square aroundSquare) {
+        Set<Square> adjacents = getAdjacent(aroundSquare);
+        
+        int mines = 0;
+        for (Square square : adjacents) {
+            if(square.isMine()) {
+                mines++;
+            }
+        }
+        return mines;
+    }
+    
     public Square getSquare(Position position) {
         return squares.get(position);
     }

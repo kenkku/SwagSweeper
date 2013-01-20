@@ -47,4 +47,25 @@ public class FieldTest {
         
         assertTrue(expected.equals(adjacents));
     }
+    
+    /**
+     * Tests mine count around square
+     * 
+     * -------
+     * |     |
+     * | 111 |
+     * | 1*1 |
+     * | 1121|
+     * |   1*|
+     * |-----|
+     */
+    @Test
+    public void testMineCount() {
+        f.getSquare(new Position(4, 4)).setMine(true);
+        f.getSquare(new Position(2, 2)).setMine(true);
+        
+        assertEquals(2, f.getNumMines(f.getSquare(new Position(3, 3))));
+        assertEquals(1, f.getNumMines(f.getSquare(new Position(2, 3))));
+        assertEquals(0, f.getNumMines(f.getSquare(new Position(0, 0))));
+    }
 }
