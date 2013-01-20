@@ -45,5 +45,18 @@ public class RevealActionTest {
                     + "000";
         assertTrue(ActionTestUtils.revealedMatches(f, mask));
     }
+    
+    @Test
+    public void testRevealEmptySquares() {
+        f.getSquare(new Position(2, 2)).setMine(true);
+        
+        Action r = new RevealAction(f, new Position(0, 0));
+        r.execute();
+        
+        String mask = "111\n"
+                    + "111\n"
+                    + "110";
+        assertTrue(ActionTestUtils.revealedMatches(f, mask));
+    }
 
 }

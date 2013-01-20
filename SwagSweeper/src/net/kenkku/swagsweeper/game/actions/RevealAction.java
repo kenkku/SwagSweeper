@@ -1,5 +1,7 @@
 package net.kenkku.swagsweeper.game.actions;
 
+import java.util.LinkedList;
+import java.util.List;
 import net.kenkku.swagsweeper.game.Field;
 import net.kenkku.swagsweeper.game.Square;
 import net.kenkku.swagsweeper.util.Position;
@@ -10,16 +12,30 @@ import net.kenkku.swagsweeper.util.Position;
  */
 public class RevealAction extends Action {
 
-    private Square square;
+    private Square squareToReveal;
+    private List<Square> revealed = new LinkedList<Square>();
 
     public RevealAction(Field field, Position position) {
         this.field = field;
-        square = field.getSquare(position);
+        squareToReveal = field.getSquare(position);
+    }
+
+    private void recursiveReveal(Square square) {
+        square.reveal();
+        if (field.getNumMines(square) > 0) {
+            return;
+        }
+
+        for (Square s : field.getAdjacent(square)) {
+            if (!s.isRevealed()) {
+                recursiveReveal(s);
+            }
+        }
     }
 
     @Override
     public void execute() {
-        square.reveal();
+        recursiveReveal(squareToReveal);
     }
 
     @Override

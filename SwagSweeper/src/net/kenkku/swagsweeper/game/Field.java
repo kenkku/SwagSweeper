@@ -21,7 +21,7 @@ public class Field implements Observer {
         squares.put(square.getPosition(), square);
     }
 
-    Set<Square> getAdjacent(Square aroundSquare) {
+    public Set<Square> getAdjacent(Square aroundSquare) {
         Set<Square> adjacents = new HashSet<Square>();
 
         Position pos = aroundSquare.getPosition();
@@ -41,7 +41,7 @@ public class Field implements Observer {
         return squares.values();
     }
     
-    int getNumMines(Square aroundSquare) {
+    public int getNumMines(Square aroundSquare) {
         Set<Square> adjacents = getAdjacent(aroundSquare);
         
         int mines = 0;
