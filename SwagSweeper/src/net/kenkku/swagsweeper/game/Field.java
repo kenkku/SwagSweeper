@@ -1,5 +1,6 @@
 package net.kenkku.swagsweeper.game;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -36,6 +37,10 @@ public class Field implements Observer {
         return adjacents;
     }
 
+    public Collection<Square> getAllSquares() {
+        return squares.values();
+    }
+    
     int getNumMines(Square aroundSquare) {
         Set<Square> adjacents = getAdjacent(aroundSquare);
         
