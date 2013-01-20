@@ -13,7 +13,7 @@ import net.kenkku.swagsweeper.util.Position;
  *
  * @author Tero Keinänen <kenkku@kenkku.net>
  */
-public class Field implements Observer {
+public class Field {
 
     private Map<Position, Square> squares = new HashMap<Position, Square>();
 
@@ -57,14 +57,4 @@ public class Field implements Observer {
         return squares.get(position);
     }
 
-    @Override
-    public void update(Observable o, Object arg) {
-        if (o.getClass() != Square.class) {
-            return;
-        }
-
-        Square changedSquare = (Square) o;
-
-
-    }
 }
