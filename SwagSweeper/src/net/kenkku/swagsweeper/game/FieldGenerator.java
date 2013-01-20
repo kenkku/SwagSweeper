@@ -8,7 +8,7 @@ import net.kenkku.swagsweeper.util.Position;
  */
 public class FieldGenerator {
 
-    static Field emptyField(int width, int height) {
+    public static Field emptyField(int width, int height) {
         Field field = new Field();
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {

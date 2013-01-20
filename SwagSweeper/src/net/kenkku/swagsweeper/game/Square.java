@@ -22,14 +22,14 @@ public class Square extends Observable {
         return position.equals(otherPos);
     }
     
-    boolean reveal() {
+    public boolean reveal() {
         revealed = true;
         setChanged();
         notifyObservers();
         return false;
     }
     
-    boolean isRevealed() {
+    public boolean isRevealed() {
         return revealed;
     }
 
