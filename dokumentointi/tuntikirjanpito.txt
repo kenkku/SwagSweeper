@@ -1,4 +1,7 @@
 15.01.2013
     1 h, kuvaus, NetBeans-projektin luominen, tuntikirjanpidon aloittaminen, 
     luokkakaavion hahmottelua
+19-20.01.2013
+	n. 4 h, pätkittäistä yökoodausta, logiikkaluokkien toteuttelua TDD-
+	metodilla
 
