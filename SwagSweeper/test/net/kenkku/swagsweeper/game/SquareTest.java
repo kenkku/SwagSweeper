@@ -36,7 +36,7 @@ public class SquareTest {
         TestObserver observer = new TestObserver();
 
         s.addObserver(observer);
-        s.reveal();
+        s.setRevealed(true);
 
         assertTrue("Square should update observers after revealing",
                 observer.updated);
@@ -44,10 +44,10 @@ public class SquareTest {
 
     @Test
     public void testReveal() {
-        // TODO: test for reveal() return value?
+        // TODO: test for setRevealed() return value?
         assertFalse(s.isRevealed());
 
-        s.reveal();
+        s.setRevealed(true);
         assertTrue(s.isRevealed());
     }
 }

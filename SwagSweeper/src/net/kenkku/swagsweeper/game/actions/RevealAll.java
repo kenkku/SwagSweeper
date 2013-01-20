@@ -22,7 +22,7 @@ public class RevealAll extends Action {
     public void execute() {
         for(Square square : field.getAllSquares()){
             if(!square.isRevealed()) {
-                square.reveal();
+                square.setRevealed(true);
                 revealed.add(square);
             }
         }
@@ -30,7 +30,9 @@ public class RevealAll extends Action {
 
     @Override
     public void undo() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        for (Square square : revealed) {
+            square.setRevealed(false);
+        }
     }
     
 }

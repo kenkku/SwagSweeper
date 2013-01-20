@@ -21,7 +21,7 @@ public class RevealAction extends Action {
     }
 
     private void recursiveReveal(Square square) {
-        square.reveal();
+        square.setRevealed(true);
         if (field.getNumMines(square) > 0) {
             return;
         }
