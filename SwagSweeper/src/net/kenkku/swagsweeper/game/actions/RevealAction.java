@@ -22,6 +22,7 @@ public class RevealAction extends Action {
 
     private void recursiveReveal(Square square) {
         square.setRevealed(true);
+        revealed.add(square);
         if (field.getNumMines(square) > 0) {
             return;
         }
@@ -40,6 +41,8 @@ public class RevealAction extends Action {
 
     @Override
     public void undo() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        for (Square square : revealed) {
+            square.setRevealed(false);
+        }
     }
 }

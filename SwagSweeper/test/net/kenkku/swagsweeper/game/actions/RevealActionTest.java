@@ -58,5 +58,24 @@ public class RevealActionTest {
                     + "110";
         assertTrue(ActionTestUtils.revealedMatches(f, mask));
     }
+    
+    @Test
+    public void testRevealUndo() {
+        f.getSquare(new Position(0, 0)).setMine(true);
 
+        Action r = new RevealAction(f, new Position(1, 1));
+        r.execute();
+        r.undo();
+
+        String mask = "000\n"
+                    + "000\n"
+                    + "000";
+        assertTrue("Undoing one square reveal", ActionTestUtils.revealedMatches(f, mask));
+        
+        r = new RevealAction(f, new Position(2,2));
+        r.execute();
+        r.undo();
+        
+        assertTrue("Undoing multi square reveal", ActionTestUtils.revealedMatches(f, mask));
+    }
 }
