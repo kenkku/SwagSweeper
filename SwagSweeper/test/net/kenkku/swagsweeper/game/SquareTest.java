@@ -27,7 +27,6 @@ public class SquareTest {
         @Override
         public void update(Observable o, Object arg) {
             updated = true;
-            System.out.println("updated");
         }
     }
 
@@ -45,9 +44,11 @@ public class SquareTest {
     @Test
     public void testReveal() {
         // TODO: test for setRevealed() return value?
-        assertFalse(s.isRevealed());
+        assertFalse("Square should not be revealed by default", 
+                s.isRevealed());
 
         s.setRevealed(true);
-        assertTrue(s.isRevealed());
+        assertTrue("Square should be revealed after calling setRevealed",
+                s.isRevealed());
     }
 }

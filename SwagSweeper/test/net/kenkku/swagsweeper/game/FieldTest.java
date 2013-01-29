@@ -64,8 +64,8 @@ public class FieldTest {
         f.getSquare(new Position(4, 4)).setMine(true);
         f.getSquare(new Position(2, 2)).setMine(true);
         
-        assertEquals(2, f.getNumMines(f.getSquare(new Position(3, 3))));
-        assertEquals(1, f.getNumMines(f.getSquare(new Position(2, 3))));
-        assertEquals(0, f.getNumMines(f.getSquare(new Position(0, 0))));
+        assertEquals("Miinojen määrän pitäisi olla 2", 2, f.getNumMines(f.getSquare(new Position(3, 3))));
+        assertEquals("Miinojen määrän pitäisi olla 1", 1, f.getNumMines(f.getSquare(new Position(2, 3))));
+        assertEquals("Miinojen määrän pitäisi olla 0", 0, f.getNumMines(f.getSquare(new Position(0, 0))));
     }
 }
