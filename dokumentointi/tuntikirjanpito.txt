@@ -8,5 +8,5 @@
     n. 3 h koodausta, Actionien aloitus
 22.01.2013
     15 min, luokkakaavio
-
-
+29.01.2013
+    1 h, viime hetken yritystä: luokkakaavio päivitetty, MinesweeperGame-luokka aloitettu
