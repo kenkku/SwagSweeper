@@ -41,6 +41,16 @@ public class Field {
         return squares.values();
     }
     
+    public int getMineCount() {
+        int minecount = 0;
+        for(Square square : squares.values()) {
+            if(square.isMine()) {
+                minecount++;
+            }
+        }
+        return minecount;
+    }
+    
     public int getNumMines(Square aroundSquare) {
         Set<Square> adjacents = getAdjacent(aroundSquare);
         

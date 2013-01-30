@@ -60,12 +60,21 @@ public class FieldTest {
      * |-----|
      */
     @Test
-    public void testMineCount() {
+    public void testMineCountForPosition() {
         f.getSquare(new Position(4, 4)).setMine(true);
         f.getSquare(new Position(2, 2)).setMine(true);
         
-        assertEquals("Miinojen määrän pitäisi olla 2", 2, f.getNumMines(f.getSquare(new Position(3, 3))));
-        assertEquals("Miinojen määrän pitäisi olla 1", 1, f.getNumMines(f.getSquare(new Position(2, 3))));
-        assertEquals("Miinojen määrän pitäisi olla 0", 0, f.getNumMines(f.getSquare(new Position(0, 0))));
+        assertEquals("Square should have 2 mines", 2, f.getNumMines(f.getSquare(new Position(3, 3))));
+        assertEquals("Square should have 1 mines", 1, f.getNumMines(f.getSquare(new Position(2, 3))));
+        assertEquals("Square should have 0 mines", 0, f.getNumMines(f.getSquare(new Position(0, 0))));
+    }
+    
+    @Test
+    public void testMineCount() {
+        assertEquals("Empty field should have 0 mines", 0, f.getMineCount());
+        f.getSquare(new Position(4, 4)).setMine(true);
+        f.getSquare(new Position(2, 2)).setMine(true);
+        assertEquals("Field should have 2 mines after setting 2", 2, f.getMineCount());
+        
     }
 }
