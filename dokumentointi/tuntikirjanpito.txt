@@ -10,3 +10,9 @@
     15 min, luokkakaavio
 29.01.2013
     1 h, viime hetken yritystä: luokkakaavio päivitetty, MinesweeperGame-luokka aloitettu
+30.01.2013
+    2 h, GUIn aloittaminen
+03.02.2013
+    30 min, GUI-säätöä
+05.02.2013
+    2 h, GUI-säätöä, JavaDocien lisäämistä, sekvenssikaavio
