@@ -5,7 +5,8 @@ import java.util.List;
 import net.kenkku.swagsweeper.game.actions.Action;
 
 /**
- *
+ * Kuvaa yhtä miinaharavapeliä
+ * 
  * @author Tero Keinänen <kenkku@kenkku.net>
  */
 public class MinesweeperGame {
@@ -18,7 +19,7 @@ public class MinesweeperGame {
     private long endTime;
 
     public MinesweeperGame(int width, int height) {
-        field = FieldGenerator.randomField(width, height);
+        field = FieldGenerator.randomField(width, height, 0);
     }
 
     public boolean isGameOver() {

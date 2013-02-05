@@ -4,6 +4,7 @@ import java.util.Observable;
 import net.kenkku.swagsweeper.util.Position;
 
 /**
+ * Miinakentän yksi ruutu
  *
  * @author Tero Keinänen <kenkku@kenkku.net>
  */

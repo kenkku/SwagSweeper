@@ -4,7 +4,8 @@ import net.kenkku.swagsweeper.game.Field;
 import net.kenkku.swagsweeper.game.MinesweeperGame;
 
 /**
- *
+ * Yksi askel miinaharavapelissä
+ * 
  * @author Tero Keinänen <kenkku@kenkku.net>
  */
 public abstract class Action {

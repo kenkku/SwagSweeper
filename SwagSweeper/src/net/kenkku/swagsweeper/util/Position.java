@@ -1,6 +1,7 @@
 package net.kenkku.swagsweeper.util;
 
 /**
+ * (x, y)-koordinaatti miinakentällä
  *
  * @author Tero Keinänen <kenkku@kenkku.net>
  */

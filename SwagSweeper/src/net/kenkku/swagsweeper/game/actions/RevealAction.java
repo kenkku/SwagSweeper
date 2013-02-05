@@ -8,6 +8,7 @@ import net.kenkku.swagsweeper.game.Square;
 import net.kenkku.swagsweeper.util.Position;
 
 /**
+ * Yhden ruudun avaaminen, tarvittaessa avataan viereisiä ruutuja
  *
  * @author Tero Keinänen <kenkku@kenkku.net>
  */

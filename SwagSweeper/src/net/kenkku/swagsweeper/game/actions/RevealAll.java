@@ -7,6 +7,7 @@ import net.kenkku.swagsweeper.game.MinesweeperGame;
 import net.kenkku.swagsweeper.game.Square;
 
 /**
+ * Kaikkien jäljelläolevien ruutujen avaaminen, käytetään miinaan osuttaessa
  *
  * @author Tero Keinänen <kenkku@kenkku.net>
  */
