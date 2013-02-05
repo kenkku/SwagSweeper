@@ -2,6 +2,7 @@ package net.kenkku.swagsweeper.game.actions;
 
 import net.kenkku.swagsweeper.game.Field;
 import net.kenkku.swagsweeper.game.FieldGenerator;
+import net.kenkku.swagsweeper.game.MinesweeperGame;
 import net.kenkku.swagsweeper.util.Position;
 import org.junit.After;
 import org.junit.Before;
@@ -14,14 +15,17 @@ import static org.junit.Assert.*;
  */
 public class RevealActionTest {
     
-    private Field f;
+    private Field field;
+    private MinesweeperGame game;
     
     public RevealActionTest() {
     }
     
     @Before
     public void setUp() {
-        f = FieldGenerator.emptyField(3, 3);
+        game = new MinesweeperGame(3, 3);
+        game.setField(FieldGenerator.emptyField(3, 3));
+        field = game.getField();
     }
     
     /**
@@ -35,47 +39,47 @@ public class RevealActionTest {
      */
     @Test
     public void testRevealOnlyOneSquare() {
-        f.getSquare(new Position(2, 2)).setMine(true);
+        field.getSquare(new Position(2, 2)).setMine(true);
         
-        Action r = new RevealAction(f, new Position(1, 1));
+        Action r = new RevealAction(game, new Position(1, 1));
         r.execute();
 
         String mask = "000\n"
                     + "010\n"
                     + "000";
-        assertTrue(ActionTestUtils.revealedMatches(f, mask));
+        assertTrue(ActionTestUtils.revealedMatches(field, mask));
     }
     
     @Test
     public void testRevealEmptySquares() {
-        f.getSquare(new Position(2, 2)).setMine(true);
+        field.getSquare(new Position(2, 2)).setMine(true);
         
-        Action r = new RevealAction(f, new Position(0, 0));
+        Action r = new RevealAction(game, new Position(0, 0));
         r.execute();
         
         String mask = "111\n"
                     + "111\n"
                     + "110";
-        assertTrue(ActionTestUtils.revealedMatches(f, mask));
+        assertTrue(ActionTestUtils.revealedMatches(field, mask));
     }
     
     @Test
     public void testRevealUndo() {
-        f.getSquare(new Position(0, 0)).setMine(true);
+        field.getSquare(new Position(0, 0)).setMine(true);
 
-        Action r = new RevealAction(f, new Position(1, 1));
+        Action r = new RevealAction(game, new Position(1, 1));
         r.execute();
         r.undo();
 
         String mask = "000\n"
                     + "000\n"
                     + "000";
-        assertTrue("Undoing one square reveal", ActionTestUtils.revealedMatches(f, mask));
+        assertTrue("Undoing one square reveal", ActionTestUtils.revealedMatches(field, mask));
         
-        r = new RevealAction(f, new Position(2,2));
+        r = new RevealAction(game, new Position(2,2));
         r.execute();
         r.undo();
         
-        assertTrue("Undoing multi square reveal", ActionTestUtils.revealedMatches(f, mask));
+        assertTrue("Undoing multi square reveal", ActionTestUtils.revealedMatches(field, mask));
     }
 }

@@ -17,4 +17,14 @@ public class FieldGenerator {
         }
         return field;
     }
+    
+    public static Field randomField(int width, int height) {
+        Field field = new Field();
+        for (int x = 0; x < width; x++) {
+            for (int y = 0; y < height; y++) {
+                field.setSquare(new Square(new Position(x, y), false));
+            }
+        }
+        return field;        
+    }
 }

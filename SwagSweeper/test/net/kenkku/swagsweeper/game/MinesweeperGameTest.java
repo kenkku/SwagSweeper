@@ -21,8 +21,8 @@ public class MinesweeperGameTest {
 
     @Before
     public void setUp() {
-        game = new MinesweeperGame();
-        action = new RevealAction(new Field(), new Position(0, 0));
+        game = new MinesweeperGame(5, 5);
+        action = new RevealAction(game, new Position(0, 0));
     }
 
     @Test

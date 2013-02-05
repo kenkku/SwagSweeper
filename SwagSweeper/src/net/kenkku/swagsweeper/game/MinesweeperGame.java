@@ -17,6 +17,10 @@ public class MinesweeperGame {
     private long startTime;
     private long endTime;
 
+    public MinesweeperGame(int width, int height) {
+        field = FieldGenerator.randomField(width, height);
+    }
+
     public boolean isGameOver() {
         return gameOver;
     }
@@ -38,11 +42,16 @@ public class MinesweeperGame {
                 running = true;
             }
             history.add(action);
+            action.execute();
             return true;
         }
         return false;
     }
 
+    public void setField(Field field) {
+        this.field = field;
+    }
+    
     public Field getField() {
         return field;
     }
