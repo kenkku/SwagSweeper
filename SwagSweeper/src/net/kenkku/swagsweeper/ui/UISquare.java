@@ -20,6 +20,7 @@ public class UISquare extends JButton implements Observer, MouseListener {
     private Position position;
     private Square square;
     private MinesweeperGame game;
+    private boolean flagged = false;
 
     public UISquare(Position position, Square square, MinesweeperGame game) {
         super();
@@ -51,10 +52,16 @@ public class UISquare extends JButton implements Observer, MouseListener {
     @Override
     public void mouseClicked(MouseEvent e) {
         if (!square.isRevealed() && isEnabled()) {
-            if (e.getButton() == MouseEvent.BUTTON1) {
+            if (e.getButton() == MouseEvent.BUTTON1 && !flagged) {
                 game.addMove(new RevealAction(game, position));
             } else if (e.getButton() == MouseEvent.BUTTON3) {
-                setText("M!");
+                if(flagged) {
+                    setText("");
+                    flagged = false;
+                } else {
+                    setText("M!");
+                    flagged = true;
+                }
                 repaint();
             }
         }
