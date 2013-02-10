@@ -21,7 +21,7 @@ public class MinesweeperGame {
     private long endTime;
 
     public MinesweeperGame(int width, int height) {
-        field = FieldGenerator.randomField(width, height, 0);
+        field = FieldGenerator.randomField(width, height, 10);
     }
 
     public boolean isGameOver() {

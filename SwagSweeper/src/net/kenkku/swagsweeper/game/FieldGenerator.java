@@ -1,5 +1,6 @@
 package net.kenkku.swagsweeper.game;
 
+import java.util.Random;
 import net.kenkku.swagsweeper.util.Position;
 
 /**
@@ -24,11 +25,19 @@ public class FieldGenerator {
     
     /**
      * Alustaa uuden Field-olion, johon asetetaan satunnaisiin paikkoihin miinoja
-     * 
-     * @todo satunnaisuus
      */
     public static Field randomField(int width, int height, int mines) {
         Field field = emptyField(width, height);
+        Object[] squares = field.getAllSquares().toArray();
+        Random rand = new Random();
+        
+        while (mines > 0) {
+            Square randomSquare = (Square) squares[rand.nextInt(squares.length)];
+            if(!randomSquare.isMine()) {
+                randomSquare.setMine(true);
+                mines--;
+            }
+        }
         return field;
     }
 }
