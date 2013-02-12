@@ -13,7 +13,9 @@ public class MinesweeperGame {
 
     private Field field;
     private List<Action> history = new ArrayList();
+    /** Peli on ohi (uusia siirtoja ei saisi tehdä) */
     private boolean gameOver = false;
+    /** Peli on käynnissä */
     private boolean running;
     private long startTime;
     private long endTime;

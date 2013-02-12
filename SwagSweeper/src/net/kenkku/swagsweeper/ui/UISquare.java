@@ -12,7 +12,8 @@ import net.kenkku.swagsweeper.game.actions.RevealAction;
 import net.kenkku.swagsweeper.util.Position;
 
 /**
- *
+ * Ruutua GUIssa vastaava komponentti
+ * 
  * @author Tero Keinänen <kenkku@kenkku.net>
  */
 public class UISquare extends JButton implements Observer, MouseListener {

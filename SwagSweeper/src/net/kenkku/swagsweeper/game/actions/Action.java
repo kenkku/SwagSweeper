@@ -12,7 +12,9 @@ public abstract class Action {
     protected MinesweeperGame game;
     protected Field field;
     
+    /** Toteuttaa askeleen */
     public abstract void execute();
+    /** Kumoaa toteutetun askeleen */
     public abstract void undo();
     
     

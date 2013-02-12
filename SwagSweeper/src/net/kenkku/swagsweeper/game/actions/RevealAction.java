@@ -23,6 +23,10 @@ public class RevealAction extends Action {
         squareToReveal = field.getSquare(position);
     }
 
+    /**
+     * Avaa Square-olion sekä sen ympärillä olevat oliot, jos 
+     * ruudun ympärillä ei ole miinoja
+     */
     private void recursiveReveal(Square square) {
         square.setRevealed(true);
         revealed.add(square);

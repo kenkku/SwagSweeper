@@ -12,6 +12,7 @@ public class Square extends Observable {
     
     private boolean isMine;
     private Position position;
+    /** Onko pelaaja avannut ruudun */
     private boolean revealed;
     
     Square(Position position, boolean isMine) {
@@ -23,8 +24,14 @@ public class Square extends Observable {
         return position.equals(otherPos);
     }
     
+    /**
+     * Asettaa ruudun piilossa/näkyvillä -statuksen ja päivittää 
+     * käyttöliittymäkomponentit (UISquare)
+     */
     public void setRevealed(boolean revealed) {
         this.revealed = revealed;
+        
+        // Ilmoitetaan tarkkailijoille (UISquare-olio) muutoksesta
         setChanged();
         notifyObservers();
     }

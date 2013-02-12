@@ -15,7 +15,6 @@ public class RevealAll extends Action {
 
     private List<Square> revealed = new LinkedList<Square>();
     
-    
     RevealAll(MinesweeperGame game) {
         this.game = game;
         this.field = game.getField();

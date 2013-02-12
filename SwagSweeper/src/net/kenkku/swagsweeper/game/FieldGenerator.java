@@ -3,7 +3,8 @@ package net.kenkku.swagsweeper.game;
 import net.kenkku.swagsweeper.util.Position;
 
 /**
- *
+ * Luokka Field-olioiden luomiseen
+ * 
  * @author Tero Keinänen <kenkku@kenkku.net>
  */
 public class FieldGenerator {

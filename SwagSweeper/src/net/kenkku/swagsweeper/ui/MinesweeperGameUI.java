@@ -36,6 +36,9 @@ public class MinesweeperGameUI implements Runnable {
         newGame(10, 10);
     }
 
+    /**
+     * Luo halutun kokoisen ruudukon UISquare-komponentteja
+     */
     private void createSquares(Container c, int width, int height) {
         c.setLayout(new GridLayout(width, height));
 
@@ -48,6 +51,10 @@ public class MinesweeperGameUI implements Runnable {
         }
     }
 
+    /**
+     * Luo uuden pelin (MinesweeperGame) ja siihen liittyvät
+     * käyttöliittymäkomponentit (UISquare)
+     */
     private void newGame(int width, int height) {
         Container c = frame.getContentPane();
         if(squareContainer != null) {
