@@ -16,3 +16,5 @@
     30 min, GUI-säätöä
 05.02.2013
     2 h, GUI-säätöä, JavaDocien lisäämistä, sekvenssikaavio
+12.02.2013
+    30 min, dokumentointia ja suunnittelua
