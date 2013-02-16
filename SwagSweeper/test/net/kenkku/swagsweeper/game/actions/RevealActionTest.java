@@ -82,4 +82,24 @@ public class RevealActionTest {
         
         assertTrue("Undoing multi square reveal", ActionTestUtils.revealedMatches(field, mask));
     }
+    
+    @Test
+    public void testHittingMineEndsGame() {
+        Position minepos = new Position(0, 0);
+        field.getSquare(minepos).setMine(true);
+        
+        Action action = new RevealAction(game, minepos);
+        game.addMove(action);
+        
+        assertTrue("Game should be over after hitting a mine", 
+                game.isGameOver());
+        assertFalse("Game should not be running after hitting amine", 
+                game.isRunning());
+        
+        String mask = "111\n"
+                    + "111\n"
+                    + "111";
+        assertTrue("All squares should be revealed after hitting a mine", 
+                ActionTestUtils.revealedMatches(field, mask));
+    }
 }

@@ -45,6 +45,8 @@ public class RevealAction extends Action {
     public void execute() {
         if (squareToReveal.isMine()) {
             squareToReveal.setRevealed(true);
+            revealed.add(squareToReveal);
+            
             game.addMove(new RevealAll(game));
             game.gameOver();
             return;
