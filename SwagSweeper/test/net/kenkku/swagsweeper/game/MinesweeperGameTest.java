@@ -23,6 +23,7 @@ public class MinesweeperGameTest {
     public void setUp() {
         game = new MinesweeperGame(5, 5);
         action = new RevealAction(game, new Position(0, 0));
+        game.setField(FieldGenerator.emptyField(5, 5));
     }
 
     @Test

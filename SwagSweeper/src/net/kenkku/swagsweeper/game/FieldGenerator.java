@@ -1,5 +1,6 @@
 package net.kenkku.swagsweeper.game;
 
+import java.security.InvalidParameterException;
 import java.util.Random;
 import net.kenkku.swagsweeper.util.Position;
 
@@ -27,6 +28,10 @@ public class FieldGenerator {
      * Alustaa uuden Field-olion, johon asetetaan satunnaisiin paikkoihin miinoja
      */
     public static Field randomField(int width, int height, int mines) {
+        if(mines > width * height) {
+            throw new InvalidParameterException("Can't have more mines than there are squares");
+        }
+        
         Field field = emptyField(width, height);
         Object[] squares = field.getAllSquares().toArray();
         Random rand = new Random();
