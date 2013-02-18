@@ -84,7 +84,7 @@ public class RevealActionTest {
     }
     
     @Test
-    public void testHittingMineEndsGame() {
+    public void testHittingMine() {
         Position minepos = new Position(0, 0);
         field.getSquare(minepos).setMine(true);
         
@@ -93,7 +93,7 @@ public class RevealActionTest {
         
         assertTrue("Game should be over after hitting a mine", 
                 game.isGameOver());
-        assertFalse("Game should not be running after hitting amine", 
+        assertFalse("Game should not be running after hitting a mine", 
                 game.isRunning());
         
         String mask = "111\n"
