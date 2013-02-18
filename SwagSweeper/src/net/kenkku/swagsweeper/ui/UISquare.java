@@ -1,6 +1,7 @@
 package net.kenkku.swagsweeper.ui;
 
 import java.awt.Dimension;
+import java.awt.Insets;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.Observable;
@@ -29,6 +30,8 @@ public class UISquare extends JButton implements Observer, MouseListener {
         this.square = square;
         this.game = game;
 
+        setMargin(new Insets(0, 0, 0, 0));
+        
         addMouseListener(this);
 
         square.addObserver(this);
