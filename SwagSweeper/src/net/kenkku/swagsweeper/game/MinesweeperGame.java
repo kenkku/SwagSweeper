@@ -6,25 +6,31 @@ import net.kenkku.swagsweeper.game.actions.Action;
 
 /**
  * Kuvaa yhtä miinaharavapeliä
- * 
+ *
  * @author Tero Keinänen <kenkku@kenkku.net>
  */
 public class MinesweeperGame {
 
     private Field field;
     private List<Action> history = new ArrayList();
-    /** Peli on ohi (uusia siirtoja ei saisi tehdä) */
+    /**
+     * Peli on ohi (uusia siirtoja ei saisi tehdä)
+     */
     private boolean gameOver = false;
-    /** Peli on käynnissä */
-    private boolean running;
+    /**
+     * Peli on käynnissä
+     */
+    private boolean running = false;
     private long startTime;
     private long endTime;
+    private int mines;
 
     public MinesweeperGame(int width, int height) {
         this(width, height, 0);
     }
-    
+
     public MinesweeperGame(int width, int height, int mines) {
+        this.mines = mines;
         field = FieldGenerator.randomField(width, height, mines);
     }
 
@@ -37,12 +43,12 @@ public class MinesweeperGame {
         running = false;
         endTime = System.nanoTime();
     }
-    
+
     public boolean isRunning() {
         return running;
     }
 
-    public boolean addMove(Action action) {
+    public void addMove(Action action) {
         if (!gameOver) {
             if (!running) {
                 startTime = System.nanoTime();
@@ -50,24 +56,32 @@ public class MinesweeperGame {
             }
             history.add(action);
             action.execute();
-            return true;
         }
-        return false;
     }
-
+    
+    /**
+     * Palauttaa listan siirroista. Lähinnä testaamista varten.
+     */
+    List<Action> getActions() {
+        return history;
+    }
+    
     public void setField(Field field) {
         this.field = field;
     }
-    
+
     public Field getField() {
         return field;
     }
 
+    /**
+     * Palauttaa pelin keston millisekunteina
+     */
     public long getTime() {
         if (running) {
-            return System.nanoTime() - startTime;
+            return (System.nanoTime() - startTime) / 1000000;
         } else {
-            return endTime - startTime;
+            return (endTime - startTime) / 1000000;
         }
     }
 }

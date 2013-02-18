@@ -1,5 +1,7 @@
 package net.kenkku.swagsweeper.game;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import net.kenkku.swagsweeper.game.actions.Action;
 import net.kenkku.swagsweeper.game.actions.RevealAction;
 import net.kenkku.swagsweeper.util.Position;
@@ -29,8 +31,10 @@ public class MinesweeperGameTest {
     @Test
     public void testAddMove() {
         game.gameOver();
-
-        assertFalse("addMove should not add the move if game is over", game.addMove(action));
+        
+        // Should not happen
+        game.addMove(action);
+        assertEquals(0, game.getActions().size());
     }
 
     @Test
@@ -45,7 +49,24 @@ public class MinesweeperGameTest {
     }
     
     @Test
-    public void testGetTime() {
-        assertTrue(game.getTime() == 0);
+    public void testGetTime() throws InterruptedException {
+        assertTrue("Time should be 0 before starting", game.getTime() == 0);
+        
+        game.addMove(action);
+        Thread.sleep(10);
+        
+        long timeAfterMove = game.getTime();
+        assertTrue("Elapsed time should be greater than 0 after adding move", 
+                0 < timeAfterMove);
+        
+        game.gameOver();
+        
+        long timeGameOver = game.getTime();
+        Thread.sleep(10);
+        long timeGameOverAndWait = game.getTime();
+        
+        assertEquals("Timer should stop after game is over", 
+                timeGameOver, timeGameOverAndWait);
+                
     }
 }
