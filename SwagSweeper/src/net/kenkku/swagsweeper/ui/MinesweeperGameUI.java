@@ -42,7 +42,7 @@ public class MinesweeperGameUI implements Runnable, Observer {
         infobar = new InfoBar();
         c.add(infobar, BorderLayout.NORTH);
 
-        newGame(10, 10, c);
+        newGame(10, 10);
 
         frame.pack();
     }
@@ -66,7 +66,9 @@ public class MinesweeperGameUI implements Runnable, Observer {
      * Luo uuden pelin (MinesweeperGame) ja siihen liittyvät
      * käyttöliittymäkomponentit (UISquare)
      */
-    private void newGame(int width, int height, Container c) {
+    public void newGame(int width, int height) {
+        Container c = frame.getContentPane();
+        
         if (squareContainer != null) {
             c.remove(squareContainer);
         }
@@ -81,10 +83,14 @@ public class MinesweeperGameUI implements Runnable, Observer {
 
         infobar.setGame(currentGame);
     }
+
+    public MinesweeperGame getCurrentGame() {
+        return currentGame;
+    }
     @Override
     public void update(Observable o, Object arg) {
         if (currentGame.isGameOver()) {
-            endscreen = new EndscreenGlassPane();
+            endscreen = new EndscreenGlassPane(this);
             
             frame.setGlassPane(endscreen);
             endscreen.setVictorious(currentGame.isVictorious());
