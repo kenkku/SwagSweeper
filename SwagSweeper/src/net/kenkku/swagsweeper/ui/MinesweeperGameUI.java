@@ -1,9 +1,11 @@
 package net.kenkku.swagsweeper.ui;
 
+import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.GridLayout;
-import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
@@ -15,11 +17,13 @@ import net.kenkku.swagsweeper.util.Position;
  *
  * @author Tero Keinänen <kenkku@kenkku.net>
  */
-public class MinesweeperGameUI implements Runnable {
+public class MinesweeperGameUI implements Runnable, Observer {
 
     private MinesweeperGame currentGame;
     private JFrame frame;
     private Container squareContainer;
+    private InfoBar infobar;
+    private EndscreenGlassPane endscreen;
 
     @Override
     public void run() {
@@ -33,7 +37,14 @@ public class MinesweeperGameUI implements Runnable {
     }
 
     private void createComponents(Container c) {
-        newGame(10, 10);
+        c.setLayout(new BorderLayout());
+
+        infobar = new InfoBar();
+        c.add(infobar, BorderLayout.NORTH);
+
+        newGame(10, 10, c);
+
+        frame.pack();
     }
 
     /**
@@ -46,7 +57,7 @@ public class MinesweeperGameUI implements Runnable {
             for (int y = 0; y < height; y++) {
                 Position pos = new Position(x, y);
                 Square s = currentGame.getField().getSquare(pos);
-                c.add(new UISquare(pos, s, currentGame));
+                c.add(new UISquare(pos, s, currentGame, infobar));
             }
         }
     }
@@ -55,18 +66,31 @@ public class MinesweeperGameUI implements Runnable {
      * Luo uuden pelin (MinesweeperGame) ja siihen liittyvät
      * käyttöliittymäkomponentit (UISquare)
      */
-    private void newGame(int width, int height) {
-        Container c = frame.getContentPane();
-        if(squareContainer != null) {
+    private void newGame(int width, int height, Container c) {
+        if (squareContainer != null) {
             c.remove(squareContainer);
         }
 
         squareContainer = new JPanel();
-        c.add(squareContainer);
-        
-        currentGame = new MinesweeperGame(width, height);
-        
+        c.add(squareContainer, BorderLayout.CENTER);
+
+        currentGame = new MinesweeperGame(width, height, width * height / 8);
+        currentGame.addObserver(this);
+
         createSquares(squareContainer, width, height);
+
+        infobar.setGame(currentGame);
+    }
+    @Override
+    public void update(Observable o, Object arg) {
+        if (currentGame.isGameOver()) {
+            endscreen = new EndscreenGlassPane();
+            
+            frame.setGlassPane(endscreen);
+            endscreen.setVictorious(currentGame.isVictorious());
+            
+            endscreen.setVisible(true);
+        }
     }
 
     public static void main(String[] args) {

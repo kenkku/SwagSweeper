@@ -60,6 +60,7 @@ public class MinesweeperGame extends Observable {
             }
             history.add(action);
             action.execute();
+            isVictorious();
         }
     }
 
@@ -91,9 +92,12 @@ public class MinesweeperGame extends Observable {
 
     public boolean isVictorious() {
         for (Square s : field.getAllSquares()) {
-            if((!s.isMine() && !s.isRevealed()) || (s.isMine() && s.isRevealed())) {
+            if ((!s.isMine() && !s.isRevealed()) || (s.isMine() && s.isRevealed())) {
                 return false;
             }
+        }
+        if (!gameOver) {
+            gameOver();
         }
         return true;
     }

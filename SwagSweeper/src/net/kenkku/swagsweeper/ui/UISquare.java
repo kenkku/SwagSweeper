@@ -1,6 +1,5 @@
 package net.kenkku.swagsweeper.ui;
 
-import java.awt.Dimension;
 import java.awt.Insets;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -23,12 +22,14 @@ public class UISquare extends JButton implements Observer, MouseListener {
     private Square square;
     private MinesweeperGame game;
     private boolean flagged = false;
+    private InfoBar infobar;
 
-    public UISquare(Position position, Square square, MinesweeperGame game) {
+    public UISquare(Position position, Square square, MinesweeperGame game, InfoBar infobar) {
         super();
         this.position = position;
         this.square = square;
         this.game = game;
+        this.infobar = infobar;
 
         setMargin(new Insets(0, 0, 0, 0));
         
@@ -44,6 +45,9 @@ public class UISquare extends JButton implements Observer, MouseListener {
     @Override
     public void update(Observable o, Object arg) {
         if (square.isRevealed()) {
+            if(flagged) {
+                infobar.setMinecount(infobar.getMinecount() + 1);
+            }
             if (square.isMine()) {
                 setText("*");
             } else {
@@ -62,9 +66,11 @@ public class UISquare extends JButton implements Observer, MouseListener {
                 if(flagged) {
                     setText("");
                     flagged = false;
+                    infobar.setMinecount(infobar.getMinecount() + 1);
                 } else {
-                    setText("M!");
+                    setText("!");
                     flagged = true;
+                    infobar.setMinecount(infobar.getMinecount() - 1);
                 }
                 repaint();
             }
