@@ -20,3 +20,7 @@
     10 min, satunnaisuus kenttien generoimiseen
 12.02.2013
     30 min, dokumentointia ja suunnittelua
+16.02.2013
+    30 min, bugikorjaus, yksi testi ja suunnittelua
+19.02.2013
+    3 h, yökoodausta, softa demoamiskuntoon
