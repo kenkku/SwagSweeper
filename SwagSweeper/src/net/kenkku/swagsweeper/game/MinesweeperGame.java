@@ -2,6 +2,7 @@ package net.kenkku.swagsweeper.game;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
 import net.kenkku.swagsweeper.game.actions.Action;
 
 /**
@@ -9,7 +10,7 @@ import net.kenkku.swagsweeper.game.actions.Action;
  *
  * @author Tero Keinänen <kenkku@kenkku.net>
  */
-public class MinesweeperGame {
+public class MinesweeperGame extends Observable {
 
     private Field field;
     private List<Action> history = new ArrayList();
@@ -42,6 +43,9 @@ public class MinesweeperGame {
         gameOver = true;
         running = false;
         endTime = System.nanoTime();
+
+        setChanged();
+        notifyObservers();
     }
 
     public boolean isRunning() {
@@ -58,14 +62,14 @@ public class MinesweeperGame {
             action.execute();
         }
     }
-    
+
     /**
      * Palauttaa listan siirroista. Lähinnä testaamista varten.
      */
     List<Action> getActions() {
         return history;
     }
-    
+
     public void setField(Field field) {
         this.field = field;
     }
@@ -83,5 +87,14 @@ public class MinesweeperGame {
         } else {
             return (endTime - startTime) / 1000000;
         }
+    }
+
+    public boolean isVictorious() {
+        for (Square s : field.getAllSquares()) {
+            if((!s.isMine() && !s.isRevealed()) || (s.isMine() && s.isRevealed())) {
+                return false;
+            }
+        }
+        return true;
     }
 }

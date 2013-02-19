@@ -31,7 +31,7 @@ public class MinesweeperGameTest {
     @Test
     public void testAddMove() {
         game.gameOver();
-        
+
         // Should not happen
         game.addMove(action);
         assertEquals(0, game.getActions().size());
@@ -40,33 +40,49 @@ public class MinesweeperGameTest {
     @Test
     public void testIsRunning() {
         assertFalse("Game should not be running after creation", game.isRunning());
-        
+
         game.addMove(action);
         assertTrue("Game should be running after adding first action", game.isRunning());
-        
+
         game.gameOver();
         assertFalse("Game should not be running after calling gameOver", game.isRunning());
     }
-    
+
     @Test
     public void testGetTime() throws InterruptedException {
         assertTrue("Time should be 0 before starting", game.getTime() == 0);
-        
+
         game.addMove(action);
         Thread.sleep(10);
-        
+
         long timeAfterMove = game.getTime();
-        assertTrue("Elapsed time should be greater than 0 after adding move", 
+        assertTrue("Elapsed time should be greater than 0 after adding move",
                 0 < timeAfterMove);
-        
+
         game.gameOver();
-        
+
         long timeGameOver = game.getTime();
         Thread.sleep(10);
         long timeGameOverAndWait = game.getTime();
-        
-        assertEquals("Timer should stop after game is over", 
+
+        assertEquals("Timer should stop after game is over",
                 timeGameOver, timeGameOverAndWait);
-                
+
+    }
+
+    @Test
+    public void testVictoryCondition() {
+        Field field = game.getField();
+        for (Square s : field.getAllSquares()) {
+            s.setMine(true);
+        }
+        
+        Position pos = new Position(0, 0);
+        field.getSquare(pos).setMine(false);
+
+        assertFalse(game.isVictorious());
+        
+        game.addMove(new RevealAction(game, pos));
+        assertTrue(game.isVictorious());
     }
 }
