@@ -40,7 +40,7 @@ public class Square extends Observable {
         return revealed;
     }
 
-    Position getPosition() {
+    public Position getPosition() {
         return position;
     }
     
