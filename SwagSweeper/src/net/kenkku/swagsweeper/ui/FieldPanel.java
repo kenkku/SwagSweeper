@@ -24,12 +24,12 @@ import net.kenkku.swagsweeper.util.Position;
 import sun.tools.jar.Main;
 
 /**
- *
+ * Komponentti, johon miinakenttä piirretään
+ * 
  * @author Tero Keinänen <kenkku@kenkku.net>
  */
 public class FieldPanel extends JPanel {
 
-    private int width, height;
     private MinesweeperGame game;
     private Image background;
     private Image[] numbers = new Image[9];
@@ -37,8 +37,6 @@ public class FieldPanel extends JPanel {
     private Set<Position> flagged = new HashSet();
 
     public FieldPanel(int width, int height, MinesweeperGame game) {
-        this.width = width;
-        this.height = height;
         this.game = game;
         loadImages();
 

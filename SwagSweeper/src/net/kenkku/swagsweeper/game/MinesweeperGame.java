@@ -39,6 +39,10 @@ public class MinesweeperGame extends Observable {
         return gameOver;
     }
 
+    /**
+     * Lopettaa pelin. Tämän jälkeen ajastin pysähtyy eikä uusia siirtoja voi
+     * tehdä
+     */
     public void gameOver() {
         gameOver = true;
         running = false;
@@ -52,6 +56,9 @@ public class MinesweeperGame extends Observable {
         return running;
     }
 
+    /**
+     * Lisää yhden siirron historiaan. Tarvittaessa käynnistää pelin.
+     */
     public void addMove(Action action) {
         if (!gameOver) {
             if (!running) {
@@ -90,6 +97,9 @@ public class MinesweeperGame extends Observable {
         }
     }
 
+    /**
+     * Palauttaa tiedon siitä onko peli päättynyt
+     */
     public boolean isVictorious() {
         for (Square s : field.getAllSquares()) {
             if ((!s.isMine() && !s.isRevealed()) || (s.isMine() && s.isRevealed())) {

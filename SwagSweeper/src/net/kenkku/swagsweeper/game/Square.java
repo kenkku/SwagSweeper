@@ -8,9 +8,11 @@ import net.kenkku.swagsweeper.util.Position;
  *
  * @author Tero Keinänen <kenkku@kenkku.net>
  */
-public class Square extends Observable {
+public class Square {
     
+    /** Onko ruutu miina */
     private boolean isMine;
+    /** Ruudun sijainti kentällä */
     private Position position;
     /** Onko pelaaja avannut ruudun */
     private boolean revealed;
@@ -20,20 +22,12 @@ public class Square extends Observable {
         this.isMine = isMine;
     }
     
-    boolean isAt(Position otherPos) {
-        return position.equals(otherPos);
-    }
-    
     /**
      * Asettaa ruudun piilossa/näkyvillä -statuksen ja päivittää 
      * käyttöliittymäkomponentit (UISquare)
      */
     public void setRevealed(boolean revealed) {
         this.revealed = revealed;
-        
-        // Ilmoitetaan tarkkailijoille (UISquare-olio) muutoksesta
-        setChanged();
-        notifyObservers();
     }
     
     public boolean isRevealed() {
