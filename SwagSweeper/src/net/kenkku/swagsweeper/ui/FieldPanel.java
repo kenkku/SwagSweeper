@@ -14,6 +14,7 @@ import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import net.kenkku.swagsweeper.game.MinesweeperGame;
 import net.kenkku.swagsweeper.game.Square;
@@ -50,9 +51,10 @@ public class FieldPanel extends JPanel {
         Action act = new RevealAction(game, pos);
         game.addMove(act);
         if (game.isGameOver()) {
-            System.out.println("Game over");
             if (game.isVictorious()) {
-                System.out.println("...and winnage");
+                JOptionPane.showMessageDialog(this, "You are win!");
+            } else {
+                JOptionPane.showMessageDialog(this, "You are fail :(");
             }
         }
     }
