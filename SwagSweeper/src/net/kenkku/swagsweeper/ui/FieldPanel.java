@@ -20,6 +20,7 @@ import net.kenkku.swagsweeper.game.Square;
 import net.kenkku.swagsweeper.game.actions.Action;
 import net.kenkku.swagsweeper.game.actions.RevealAction;
 import net.kenkku.swagsweeper.util.Position;
+import sun.tools.jar.Main;
 
 /**
  *
@@ -31,6 +32,7 @@ public class FieldPanel extends JPanel {
     private MinesweeperGame game;
     private Image background;
     private Image[] numbers = new Image[9];
+    private Image bomb;
     private Set<Position> flagged = new HashSet();
 
     public FieldPanel(int width, int height, MinesweeperGame game) {
@@ -43,6 +45,7 @@ public class FieldPanel extends JPanel {
             for (int i = 1; i <= 8; i++) {
                 numbers[i] = ImageIO.read(new File("images/" + i + ".png"));
             }
+            bomb = ImageIO.read(new File("images/bomb.png"));
         } catch (IOException ex) {
             Logger.getLogger(FieldPanel.class.getName()).log(Level.SEVERE, "Failed to load image", ex);
         }
@@ -112,6 +115,11 @@ public class FieldPanel extends JPanel {
             g.setPaint(new Color(1.0f, 1.0f, 1.0f, 0.0f));
             
             if (s.isRevealed()) {
+                if(s.isMine()) {
+                    g.drawImage(bomb, pos.getX() * 40, pos.getY() * 40, null);
+                    continue;
+                }
+                
                 int numMines = game.getField().getNumMines(s);
                 if (numMines > 0) {
                     g.drawImage(numbers[numMines], pos.getX() * 40, pos.getY() * 40, null);
