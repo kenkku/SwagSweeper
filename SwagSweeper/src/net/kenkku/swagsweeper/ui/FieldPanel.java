@@ -39,16 +39,7 @@ public class FieldPanel extends JPanel {
         this.width = width;
         this.height = height;
         this.game = game;
-
-        try {
-            background = ImageIO.read(new File("images/CLP_gravel2_resized.jpg"));
-            for (int i = 1; i <= 8; i++) {
-                numbers[i] = ImageIO.read(new File("images/" + i + ".png"));
-            }
-            bomb = ImageIO.read(new File("images/bomb.png"));
-        } catch (IOException ex) {
-            Logger.getLogger(FieldPanel.class.getName()).log(Level.SEVERE, "Failed to load image", ex);
-        }
+        loadImages();
 
         enableEvents(AWTEvent.MOUSE_EVENT_MASK);
 
@@ -58,9 +49,9 @@ public class FieldPanel extends JPanel {
     private void addMove(Position pos) {
         Action act = new RevealAction(game, pos);
         game.addMove(act);
-        if(game.isGameOver()) {
+        if (game.isGameOver()) {
             System.out.println("Game over");
-            if(game.isVictorious()) {
+            if (game.isVictorious()) {
                 System.out.println("...and winnage");
             }
         }
@@ -70,11 +61,11 @@ public class FieldPanel extends JPanel {
     protected void processMouseEvent(MouseEvent e) {
         if (e.getID() == MouseEvent.MOUSE_CLICKED && e.getClickCount() == 1) {
             Position pos = new Position(e.getX() / 40, e.getY() / 40);
-            if (e.getButton() == MouseEvent.BUTTON1 
+            if (e.getButton() == MouseEvent.BUTTON1
                     && !flagged.contains(pos)) {
                 addMove(pos);
-            } else if(e.getButton() == MouseEvent.BUTTON3) {
-                if(flagged.contains(pos)) {
+            } else if (e.getButton() == MouseEvent.BUTTON3) {
+                if (flagged.contains(pos)) {
                     flagged.remove(pos);
                 } else {
                     flagged.add(pos);
@@ -105,26 +96,56 @@ public class FieldPanel extends JPanel {
 
         for (Square s : game.getField().getAllSquares()) {
             Position pos = s.getPosition();
-            
+
             if (s.isRevealed()) {
                 g.setPaint(new Color(0.7f, 0.7f, 0.7f, 0.8f));
-            } else if(flagged.contains(pos)) {
+            } else if (flagged.contains(pos)) {
                 g.setPaint(new Color(1.0f, 0.3f, 0.3f, 0.5f));
             }
             g.fill3DRect(pos.getX() * 40, pos.getY() * 40, 40, 40, true);
             g.setPaint(new Color(1.0f, 1.0f, 1.0f, 0.0f));
-            
+
             if (s.isRevealed()) {
-                if(s.isMine()) {
+                if (s.isMine()) {
                     g.drawImage(bomb, pos.getX() * 40, pos.getY() * 40, null);
                     continue;
                 }
-                
+
                 int numMines = game.getField().getNumMines(s);
                 if (numMines > 0) {
                     g.drawImage(numbers[numMines], pos.getX() * 40, pos.getY() * 40, null);
                 }
             }
+        }
+    }
+
+    private void loadImages() {
+        try {
+            File backgroundFile = new File("images/CLP_gravel2_resized.jpg");
+            if (backgroundFile.exists()) {
+                background = ImageIO.read(backgroundFile);
+            } else {
+                background = ImageIO.read(MinesweeperGameUI.class.getResource("CLP_gravel2_resized.jpg"));
+            }
+
+            for (int i = 1; i <= 8; i++) {
+                File imageFile = new File("images/" + i + ".jpg");
+                if (imageFile.exists()) {
+                    numbers[i] = ImageIO.read(imageFile);
+                } else {
+                    numbers[i] = ImageIO.read(MinesweeperGameUI.class.getResource(i + ".png"));
+                }
+            }
+            File imageFile = new File("images/bomb.png");
+            if (imageFile.exists()) {
+                bomb = ImageIO.read(imageFile);
+            } else {
+                bomb = ImageIO.read(MinesweeperGameUI.class.getResource("bomb.png"));
+            }
+
+
+        } catch (IOException ex) {
+            Logger.getLogger(FieldPanel.class.getName()).log(Level.SEVERE, "Failed to load image", ex);
         }
     }
 }
